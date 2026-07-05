@@ -16,7 +16,8 @@ poke-app（ポケモン相性診断アプリ）の設計・実装ドキュメン
 
 | ドキュメント | 内容 |
 |---|---|
-| [layer-architecture-guide.md](./layer-architecture-guide.md) | FSD（Feature-Sliced Design）レイヤー設計・依存ルール・ディレクトリ構成 |
+| [layer-architecture-guide.md](./layer-architecture-guide.md) | FSD（Feature-Sliced Design）レイヤー設計・依存ルール・ディレクトリ構成（完成形の基準） |
+| [implementation-workflow-guide.md](./implementation-workflow-guide.md) | 2フェーズ構成の実装手法（widgets 仮実装 → 指示駆動で振り分け） |
 | [tanstack-start-guide.md](./tanstack-start-guide.md) | TanStack Start での Read / Mutation / Provider の実装例 |
 | [state-management-guide.md](./state-management-guide.md) | Jotai の atom 配置ルールと Provider の配置場所 |
 | [styling-guide.md](./styling-guide.md) | CSS Modules の基本ルールとファイル配置規則 |

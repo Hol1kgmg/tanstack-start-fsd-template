@@ -1,5 +1,7 @@
 # フロントエンドアーキテクチャガイド
 
+> **本ガイドの位置づけ:** 本ガイドはコードが最終的に満たすべき **完成形の基準** を定義する。実装過程では [implementation-workflow-guide.md](./implementation-workflow-guide.md) の2フェーズ構成に従い、フェーズ2（振り分け）の完了判定時に本ガイドの基準を満たしているかをチェックする。
+
 ---
 
 ## 理想
@@ -437,6 +439,7 @@ BFF 通信・レスポンス変換・カスタム hooks は置かない。
 
 ## 付録
 
+- 実装ワークフロー（2フェーズ構成）: [implementation-workflow-guide.md](./implementation-workflow-guide.md)
 - スタイリング（CSS Modules）: [styling-guide.md](./styling-guide.md)
 - 状態管理ライブラリ固有の詳細（Provider 配置等）: [state-management-guide.md](./state-management-guide.md)
 - TanStack Start での実装例: [tanstack-start-guide.md](./tanstack-start-guide.md)

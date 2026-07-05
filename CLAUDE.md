@@ -58,6 +58,7 @@ Options are passed after `--`: e.g., `task dev -- --port 3001`
 
 # Coding Standards
 
+@.claude/rules/workflow.md
 @.claude/rules/architecture.md
 @.claude/rules/typescript.md
 @.claude/rules/server-functions.md
