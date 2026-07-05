@@ -2,9 +2,9 @@
 
 import { useAtomValue } from "jotai";
 
-import { PokemonCard } from "#/entities/pokemon/ui/PokemonCard";
+import { PokemonCard } from "#/entities/pokemon";
 import { isJaAtom } from "#/shared/state/langAtom";
-import { matchResultAtom } from "#/features/diagnose-pokemon/atoms";
+import { matchResultAtom } from "#/features/diagnose-pokemon";
 
 import styles from "./MatchResultPanel.module.css";
 

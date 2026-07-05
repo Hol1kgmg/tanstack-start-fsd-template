@@ -1,12 +1,6 @@
-import type { PokemonName } from "#/entities/pokemon/model/types";
+import type { PokemonName } from "#/entities/pokemon";
 
 export type MatchRequest = { id_a: number; id_b: number };
-
-export type RawPokemonListItem = {
-  id: number;
-  name: string;
-  names: { name: string; language: { name: string } }[];
-};
 
 export type RawMatchResult = {
   score: number;

@@ -7,3 +7,9 @@ export type Pokemon = {
   id: PokemonId;
   name: PokemonName;
 };
+
+export type PokemonListItem = {
+  id: PokemonId;
+  name: PokemonName;
+  nameJa: PokemonName;
+};

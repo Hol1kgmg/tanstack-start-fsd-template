@@ -22,7 +22,7 @@ export type OrderCode = Branded<string, "OrderCode">;
 `brand()` キャスト関数は **BFF レスポンスとの境界（`adapters.ts`）でのみ** 使用する。
 
 ```ts
-// ✅ 唯一の使用場所: entities/xxx/model/adapters.ts
+// ✅ 唯一の使用場所: 各スライスの adapters.ts（entities/aggregates は model/ 配下、features は直下）
 export const toOrder = (raw: RawOrder): Order => ({
   id:   brand<OrderId>(raw.id),
   code: brand<OrderCode>(raw.code),

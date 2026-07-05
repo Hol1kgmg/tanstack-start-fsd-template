@@ -89,6 +89,7 @@ Each page is a directory: `pages/XxxName/`
 - `useXxx.ts` — Read (useQuery) and Mutation (fetch) logic, calling `routes/api/`
 - `atoms.ts` — transient state scoped to this feature (form inputs, filters)
 - `types.ts` — feature-specific type definitions
+- `adapters.ts` — conversion for feature-owned response types; allowed while the type is used only by the feature itself and upper layers via its public surface — demote to `entities`/`aggregates` once another feature or a lower layer needs the type
 
 ### aggregates/
 - `model/types.ts` — type definitions spanning multiple composite entities

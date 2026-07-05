@@ -12,7 +12,11 @@ Full reference: [docs/layer-architecture-guide.md](../docs/layer-architecture-gu
 | Read (GET) | `features/xxx/useXxx.ts` (useQuery) | Same feature's components only |
 | Mutation (POST/PUT/DELETE) | `features/xxx/useXxx.ts` | Same feature's components only |
 | BFF endpoint | `routes/api/xxx.ts` | `features/` via `fetch('/api/xxx')` |
-| Response adapter | `entities/xxx/model/adapters.ts` | `features/xxx/useXxx.ts` after fetch |
+| Response adapter | `adapters.ts` of the slice that owns the converted type | `features/xxx/useXxx.ts` after fetch |
+
+Response adapter placement follows type ownership:
+- Type used only by the feature itself and upper layers (via the feature's public surface) → `features/xxx/adapters.ts`
+- Type needed by other features or lower layers → `entities/xxx/model/adapters.ts` / `aggregates/xxx/model/adapters.ts`
 
 ## Read (useQuery)
 

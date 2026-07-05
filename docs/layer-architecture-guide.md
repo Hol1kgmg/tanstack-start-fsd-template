@@ -189,6 +189,7 @@ src/
       SearchOrderInput.module.css
       useSearchOrder.ts
       atoms.ts
+      adapters.ts                   ← feature 専用レスポンス型の変換（任意）
     toggle-favorite/
       useToggleFavorite.ts          ← UI 不要なケース（.tsx なしで成立）
 
@@ -321,6 +322,12 @@ atoms・types は置かない。features / aggregates / entities / shared の責
 | `useXxx.ts` | Read（useQuery）・Mutation（fetch）ロジック |
 | `atoms.ts` | feature に閉じた一時的な状態（フォーム入力値・フィルター条件等） |
 | `types.ts` | feature 固有の型定義 |
+| `adapters.ts` | feature に閉じたレスポンス型の変換（配置基準は下記） |
+
+**adapters.ts の配置は型の所有権で決める:**
+
+- 変換後の型を使うのがその feature 自身と**上位層**（widgets / pages が feature の公開面経由で参照）だけ → `features/xxx/adapters.ts` に置いてよい（上位からの参照は依存方向として合法のため）
+- 変換後の型を**他の feature** も必要とする（同レイヤー import 禁止のため共有不可）、または**下位層**（aggregates / entities）が必要とする → `entities/xxx/model/adapters.ts` / `aggregates/xxx/model/adapters.ts` へ降格する
 
 **命名:** 動詞+名詞（kebab-case）例: `search-order`, `toggle-favorite`
 
@@ -345,6 +352,8 @@ mutation・atoms は持たない。
 **命名:** その aggregate が表すドメイン概念の名詞（kebab-case）例: `order-summary`
 
 > **なぜ widgets に置けないか:** widgets に置くと他の widget が import する際に同レイヤー間 import（禁止）が発生する。aggregates は widgets より下位のため、widgets から自由に import できる。
+
+> **feature からの降格:** feature 所有の型（`features/xxx/adapters.ts` で変換している型）が他の feature や下位層から必要になった時点で、単一リソースなら entities、複数 composite エンティティ横断なら aggregates へ降格する。
 
 ---
 

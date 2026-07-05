@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import type { RawMatchResult } from "#/features/diagnose-pokemon/types";
+type MatchResponse = {
+  score: number;
+  name_a: string;
+  name_b: string;
+  img_a: string;
+  img_b: string;
+};
 
 type RawPokemonResponse = {
   name: string;
@@ -80,7 +86,7 @@ export const Route = createFileRoute("/api/match")({
 
           const score = await calcScore(id_a, id_b, dataA, dataB);
 
-          const result: RawMatchResult = {
+          const result: MatchResponse = {
             score,
             name_a: getJapaneseName(dataA.species, dataA.pokemon.name),
             name_b: getJapaneseName(dataB.species, dataB.pokemon.name),

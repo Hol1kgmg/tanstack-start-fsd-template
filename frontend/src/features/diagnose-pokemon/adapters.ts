@@ -1,5 +1,5 @@
 import { brand } from "#/shared/lib/branded";
-import type { PokemonName } from "#/entities/pokemon/model/types";
+import type { PokemonName } from "#/entities/pokemon";
 
 import type { MatchResult, RawMatchResult } from "./types";
 

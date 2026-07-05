@@ -11,10 +11,11 @@ import { Provider } from "jotai";
 import { LangToggle } from "#/shared/ui/LangToggle";
 
 import appCss from "../styles.css?url";
+import styles from "./__root.module.css";
 
 const RootLayout = () => (
   <Provider>
-    <header style={{ display: "flex", justifyContent: "flex-end", padding: "0.5rem 1rem" }}>
+    <header className={styles.header}>
       <LangToggle />
     </header>
     <Outlet />
