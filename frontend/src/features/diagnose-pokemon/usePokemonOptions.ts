@@ -3,12 +3,12 @@
 import { useAtomValue } from "jotai";
 
 import { usePokemonList } from "#/entities/pokemon";
-import type { PokemonListItem } from "#/entities/pokemon";
+import type { PokemonId, PokemonListItem, PokemonName } from "#/entities/pokemon";
 import { isJaAtom } from "#/shared/state/langAtom";
 
-export type PokemonOption = { value: number; label: string };
+export type PokemonOption = { value: PokemonId; label: string };
 
-const toLabel = (id: number, name: string): string =>
+const toLabel = (id: PokemonId, name: PokemonName): string =>
   `${String(id).padStart(3, "0")} - ${name}`;
 
 const toOption = (item: PokemonListItem, isJa: boolean): PokemonOption => ({
