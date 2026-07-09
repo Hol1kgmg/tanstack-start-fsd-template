@@ -18,9 +18,9 @@ CSS Modules を採用する。Vite にネイティブ組み込みのため追加
 // Button.tsx
 import styles from './Button.module.css'
 
-export function Button({ children }: { children: React.ReactNode }) {
-  return <button className={styles.button}>{children}</button>
-}
+export const Button = ({ children }: { children: React.ReactNode }) => (
+  <button className={styles.button}>{children}</button>
+)
 ```
 
 ```css

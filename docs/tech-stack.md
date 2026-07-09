@@ -25,11 +25,21 @@ poke-app（ポケモン相性診断アプリ）のフロントエンド技術ス
 
 ---
 
+## 状態管理・データ取得
+
+| ライブラリ | バージョン | 用途 |
+|---|---|---|
+| jotai | 2.20.0 | クライアント状態管理（atom） |
+| TanStack Query | 5.101.2 | サーバー状態管理（useQuery・キャッシュ）。`@tanstack/react-router-ssr-query` で Router と SSR 統合 |
+
+---
+
 ## UI
 
 | ライブラリ | バージョン | 用途 |
 |---|---|---|
 | lucide-react | 0.545.0 | アイコン |
+| react-select | 5.10.2 | セレクトボックス |
 
 ### スタイリング
 
@@ -77,7 +87,7 @@ poke-app（ポケモン相性診断アプリ）のフロントエンド技術ス
 FSD（Feature-Sliced Design）を採用。レイヤー依存は一方通行。
 
 ```
-app → widgets → features → entities → shared
+app(routes) → pages → widgets → features → aggregates → entities → shared
 ```
 
 詳細は [layer-architecture-guide.md](./layer-architecture-guide.md) を参照。

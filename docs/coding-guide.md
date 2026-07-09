@@ -107,12 +107,11 @@ export const orderKeys = {
 // ✅ features/search-order/useSearchOrder.ts
 import { orderKeys } from "#/entities/order/model/queryKeys";
 
-export function useSearchOrder(params: OrderParams) {
-  return useQuery({
+export const useSearchOrder = (params: OrderParams) =>
+  useQuery({
     queryKey: orderKeys.list(params),
     queryFn: async () => { /* fetch('/api/orders?q=...') */ },
   });
-}
 ```
 
 ---
@@ -162,25 +161,21 @@ export const toggleFavoriteFn = createServerFn({ method: "POST" })
 ```tsx
 // ❌ ブロック全体をクライアント化
 "use client";
-export function OrderListPanel({ order }: Props) {
-  return (
-    <section>
-      <OrderCard order={order} />   {/* サーバーで動くのにクライアントになる */}
-      <FavoriteButton orderId={order.id} />
-    </section>
-  );
-}
+export const OrderListPanel = ({ order }: Props) => (
+  <section>
+    <OrderCard order={order} />   {/* サーバーで動くのにクライアントになる */}
+    <FavoriteButton orderId={order.id} />
+  </section>
+);
 
 // ✅ インタラクション部分だけを切り出す
 // OrderListPanel.tsx（サーバーコンポーネントのまま）
-export function OrderListPanel({ order }: Props) {
-  return (
-    <section>
-      <OrderCard order={order} />
-      <FavoriteButton orderId={order.id} />  {/* この中だけ "use client" */}
-    </section>
-  );
-}
+export const OrderListPanel = ({ order }: Props) => (
+  <section>
+    <OrderCard order={order} />
+    <FavoriteButton orderId={order.id} />  {/* この中だけ "use client" */}
+  </section>
+);
 ```
 
 ### props 設計

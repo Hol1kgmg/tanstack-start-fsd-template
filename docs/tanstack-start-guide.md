@@ -15,8 +15,8 @@ import { useQuery } from '@tanstack/react-query'
 import { toProductList } from '#/entities/product/model/adapters'
 import type { Product } from '#/entities/product/model/types'
 
-export function useSearchProduct(query: string) {
-  return useQuery<Product[]>({
+export const useSearchProduct = (query: string) =>
+  useQuery<Product[]>({
     queryKey: ['products', query],
     queryFn: async () => {
       const res = await fetch(`/api/products?q=${encodeURIComponent(query)}`)
@@ -24,7 +24,6 @@ export function useSearchProduct(query: string) {
       return toProductList(await res.json())
     },
   })
-}
 ```
 
 ```tsx
@@ -32,7 +31,7 @@ export function useSearchProduct(query: string) {
 "use client"
 import { useSearchProduct } from './useSearchProduct'
 
-export function SearchProductInput() {
+export const SearchProductInput = () => {
   const { data: products, isLoading } = useSearchProduct('pikachu')
   // ...
 }
@@ -50,7 +49,7 @@ Mutation も `features/xxx/useXxx.ts` に定義し、BFF（`routes/api/`）へ�
 // src/features/create-order/useCreateOrder.ts
 import { toOrder } from '#/entities/order/model/adapters'
 
-export function useCreateOrder() {
+export const useCreateOrder = () => {
   const createOrder = async (data: { productId: number; quantity: number }) => {
     const res = await fetch('/api/orders', {
       method: 'POST',
@@ -69,7 +68,7 @@ export function useCreateOrder() {
 "use client"
 import { useCreateOrder } from './useCreateOrder'
 
-export function CreateOrderForm() {
+export const CreateOrderForm = () => {
   const { createOrder } = useCreateOrder()
   const handleSubmit = async () => {
     await createOrder({ productId: 1, quantity: 2 })
@@ -120,15 +119,13 @@ TanStack Start では `RouterProvider` 内に Provider をネストする。
 import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { Provider } from 'jotai'
 
+const RootLayout = () => (
+  <Provider>
+    <Outlet />
+  </Provider>
+)
+
 export const Route = createRootRoute({
   component: RootLayout,
 })
-
-function RootLayout() {
-  return (
-    <Provider>
-      <Outlet />
-    </Provider>
-  )
-}
 ```

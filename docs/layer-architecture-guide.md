@@ -162,11 +162,11 @@ src/
 
   pages/                            ← ページ構成（routes/ と 1対1 対応、CSS 許可）
     Index/                          ← routes/index.tsx に対応
-      page.tsx                      ← export function IndexPage()
+      page.tsx                      ← export const IndexPage = () => ...
       page.module.css
       index.tsx                     ← export { IndexPage } from "./page"
     Detail/                         ← routes/detail.$id.tsx に対応
-      page.tsx                      ← export function DetailPage()
+      page.tsx                      ← export const DetailPage = () => ...
       page.module.css
       index.tsx                     ← export { DetailPage } from "./page"
 
@@ -264,7 +264,7 @@ src/
 
 | ファイル | 内容 |
 |---|---|
-| `page.tsx` | widgets を組み合わせたページコンポーネント（`export function XxxPage()`） |
+| `page.tsx` | widgets を組み合わせたページコンポーネント（`export const XxxPage = () => ...`） |
 | `page.module.css` | ページ固有のレイアウト（グリッド・スペーシング等）— 任意 |
 | `index.tsx` | 公開 API（`export { XxxPage } from "./page"`） |
 

@@ -23,7 +23,7 @@ widgets/pokemon-panel/
 // PokemonCard.tsx
 import styles from './PokemonCard.module.css'
 
-export function PokemonCard({ pokemon }: Props) {
-  return <div className={styles.card}>{pokemon.name}</div>
-}
+export const PokemonCard = ({ pokemon }: Props) => (
+  <div className={styles.card}>{pokemon.name}</div>
+)
 ```

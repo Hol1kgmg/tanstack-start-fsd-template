@@ -65,7 +65,7 @@ Want to create a UI component?
 
 ### pages/
 Each page is a directory: `pages/XxxName/`
-- `page.tsx` — assembles widgets; exports `function XxxPage()`; no business logic, no custom hooks
+- `page.tsx` — assembles widgets; exports `const XxxPage = () => ...`; no business logic, no custom hooks
 - `page.module.css` — page-specific layout (grid, spacing, etc.) — optional
 - `index.tsx` — barrel: `export { XxxPage } from "./page"`
 - Shared layout structures go to `widgets/` instead

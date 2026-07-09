@@ -22,16 +22,17 @@ Response adapter placement follows type ownership:
 
 ```ts
 // ✅ features/search-pokemon/useSearchPokemon.ts
-export function useSearchPokemon(id: number) {
-  return useQuery({
-    queryKey: ["pokemon", id],
+import { pokemonKeys } from "#/entities/pokemon";
+
+export const useSearchPokemon = (id: PokemonId) =>
+  useQuery({
+    queryKey: pokemonKeys.detail(id),
     queryFn: async () => {
       const res = await fetch(`/api/pokemon/${id}`);
       if (!res.ok) throw new Error(`BFF error: ${res.status}`);
       return toPokemon(await res.json());
     },
   });
-}
 ```
 
 - Defined in `features/xxx/useXxx.ts` — owned by this feature
@@ -46,7 +47,7 @@ export function useSearchPokemon(id: number) {
 
 ```ts
 // ✅ features/toggle-favorite/useToggleFavorite.ts
-export function useToggleFavorite() {
+export const useToggleFavorite = () => {
   const toggle = async (pokemonId: PokemonId) => {
     const res = await fetch("/api/favorites", {
       method: "POST",
@@ -56,7 +57,7 @@ export function useToggleFavorite() {
     if (!res.ok) throw new Error(`BFF error: ${res.status}`);
   };
   return { toggle };
-}
+};
 ```
 
 - Owned exclusively by the feature that defines it
@@ -69,22 +70,18 @@ Apply `"use client"` only to the minimum unit that needs state, events, or brows
 ```tsx
 // ❌ Client-marking the whole block
 "use client";
-export function PokemonPanel({ pokemon }: Props) {
-  return (
-    <section>
-      <PokemonCard pokemon={pokemon} />    {/* becomes client unnecessarily */}
-      <FavoriteButton pokemonId={pokemon.id} />
-    </section>
-  );
-}
+export const PokemonPanel = ({ pokemon }: Props) => (
+  <section>
+    <PokemonCard pokemon={pokemon} />    {/* becomes client unnecessarily */}
+    <FavoriteButton pokemonId={pokemon.id} />
+  </section>
+);
 
 // ✅ Extract only the interactive part
-export function PokemonPanel({ pokemon }: Props) {
-  return (
-    <section>
-      <PokemonCard pokemon={pokemon} />
-      <FavoriteButton pokemonId={pokemon.id} />  {/* "use client" inside here only */}
-    </section>
-  );
-}
+export const PokemonPanel = ({ pokemon }: Props) => (
+  <section>
+    <PokemonCard pokemon={pokemon} />
+    <FavoriteButton pokemonId={pokemon.id} />  {/* "use client" inside here only */}
+  </section>
+);
 ```
