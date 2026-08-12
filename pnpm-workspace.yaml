@@ -1,8 +1,0 @@
-packages:
-  - "frontend"
-
-allowBuilds:
-  lefthook: true
-  lightningcss: true
-  sharp: true
-  workerd: true

@@ -20,40 +20,24 @@ Setup instructions and basic usage are documented in [README.md](./README.md).
 
 ## Task Runner
 
-Commands are managed by `Makefile` and `Taskfile`.
-
-| File | Purpose | Target |
-|---|---|---|
-| `Makefile` | Commands that don't require CLI_ARGS (env setup, etc.) | Humans / CI |
-| `Taskfile` | Commands that accept CLI_ARGS (AI agent interface) | Claude Code |
-
-### Makefile (environment setup)
-
-```
-make install   # Install dependencies
-make dev       # Start development server
-make build     # Production build
-make typecheck # TypeScript type check
-make lint      # Linter
-make test      # Unit tests
-```
-
-### Taskfile (development / verification)
+Commands are managed by `mise` tasks in `mise.toml` (humans and AI agents share the same interface).
 
 AI agents must use only these commands — never call `pnpm` directly.
 
 ```
-task dev          # Start development server
-task typecheck    # TypeScript type check
-task lint         # Linter
-task test         # Unit tests
-task build        # Production build
+mise run dev          # Start development server
+mise run typecheck    # TypeScript type check
+mise run lint         # Linter
+mise run test         # Unit tests
+mise run build        # Production build
 ```
 
-Options are passed after `--`: e.g., `task dev -- --port 3001`
+List all tasks with `mise tasks`.
+
+Options are passed after `--`: e.g., `mise run dev -- --port 3001`
 
 ## MUST NOT
-- Never use `cd` in Bash commands, and never use directory flags (`--dir`, `-C`, `--cwd`, etc.) to change the working directory. Run commands from the project root as-is (e.g., `task typecheck`, `task lint`, `git status`).
+- Never use `cd` in Bash commands, and never use directory flags (`--dir`, `-C`, `--cwd`, etc.) to change the working directory. Run commands from the project root as-is (e.g., `mise run typecheck`, `mise run lint`, `git status`).
 - Never use `grep`, `find`, `cat`, `sed`, or `awk` in Bash. Use dedicated tools instead.
 
 # Coding Standards

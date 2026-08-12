@@ -2,6 +2,12 @@
 
 ポケモン相性診断アプリ（TanStack Start / React 19 / FSD）
 
+## このリポジトリの目的
+
+本リポジトリは、TanStack Start の活用と、FSD（Feature-Sliced Design）の思想を取り入れた独自アーキテクチャの模索を目的としています。
+
+ディレクトリ構造がただ一つに定まる形で明示されたアーキテクチャを理想として、実装者による判断のばらつきやレビューコスト、暗黙の依存関係の発生を防ぐことを目指しています。詳細は [docs/layer-architecture-guide.md](./docs/layer-architecture-guide.md) を参照してください。
+
 ## 前提条件
 
 [mise](https://mise.jdx.dev/) がインストールされ、シェルに統合されていること。
@@ -32,7 +38,7 @@ Node / pnpm / gitleaks が自動でインストールされます。
 ### 2. 依存パッケージのインストール
 
 ```bash
-make install
+mise run install
 ```
 
 `pnpm install` 実行時に `lefthook install` が自動で走り、Git フックが設定されます。
@@ -40,26 +46,28 @@ make install
 ### 3. 開発サーバーの起動
 
 ```bash
-make dev
+mise run dev
 ```
 
 `http://localhost:3000` でアクセスできます。
 
 ## 開発コマンド
 
-利用可能なコマンドの一覧は `make list` で確認できます。
+利用可能なコマンドの一覧は `mise tasks` で確認できます。
 
 | コマンド | 説明 |
 |---|---|
-| `make install` | 依存パッケージのインストール |
-| `make dev` | 開発サーバー起動 |
-| `make build` | プロダクションビルド |
-| `make preview` | ビルド成果物のプレビュー |
-| `make typecheck` | TypeScript 型チェック |
-| `make lint` | リンター |
-| `make format` | コードフォーマット |
-| `make test` | ユニットテスト |
-| `make test-e2e` | E2E テスト |
+| `mise run install` | 依存パッケージのインストール |
+| `mise run dev` | 開発サーバー起動 |
+| `mise run build` | プロダクションビルド |
+| `mise run preview` | ビルド成果物のプレビュー |
+| `mise run typecheck` | TypeScript 型チェック |
+| `mise run lint` | リンター |
+| `mise run format` | コードフォーマット |
+| `mise run test` | ユニットテスト |
+| `mise run test:e2e` | E2E テスト |
+
+オプションは `--` の後に渡します（例: `mise run dev -- --port 3001`）。
 
 ## コミット時の自動チェック
 
