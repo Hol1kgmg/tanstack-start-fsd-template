@@ -1,12 +1,14 @@
-# poke-app
+# tanstack-start-fsd-template
 
-ポケモン相性診断アプリ（TanStack Start / React 19 / FSD）
+TanStack Start / React 19 / FSD テンプレートリポジトリ
 
 ## このリポジトリの目的
 
 本リポジトリは、TanStack Start の活用と、FSD（Feature-Sliced Design）の思想を取り入れた独自アーキテクチャの模索を目的としています。
 
 ディレクトリ構造がただ一つに定まる形で明示されたアーキテクチャを理想として、実装者による判断のばらつきやレビューコスト、暗黙の依存関係の発生を防ぐことを目指しています。詳細は [docs/layer-architecture-guide.md](./docs/layer-architecture-guide.md) を参照してください。
+
+なお、リポジトリには汎用サンプル機能（サンプル相性診断）が `/sample/match` に含まれています。外部APIには依存せずテンプレート内で完結しており、各 FSD レイヤー（entities / features / widgets / pages / routes/api）の実装例として参照してください。`sample-` の付くスライスは実アプリ構築時にまとめて削除できます。トップページ（`/`）はテンプレートのプレースホルダーです。
 
 ## 前提条件
 

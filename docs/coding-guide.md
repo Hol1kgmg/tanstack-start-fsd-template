@@ -1,6 +1,6 @@
 # コーディングルール
 
-poke-app フロントエンドの実装判断基準と禁止事項の逆引きリファレンス。
+TanStack Start / React 19 / FSD テンプレートリポジトリの実装判断基準と禁止事項の逆引きリファレンス。
 各トピックの詳細は末尾のリンク先ガイドを参照。
 
 ---
@@ -199,20 +199,20 @@ type Props = { orderId: number };
 
 ```ts
 // ✅ const アロー関数
-export const fetchPokemon = async (id: PokemonId): Promise<Pokemon> => {
+export const fetchOrder = async (id: OrderId): Promise<Order> => {
   // ...
 };
 
-export const PokemonCard = ({ pokemon }: Props) => {
-  return <div>{pokemon.name}</div>;
+export const OrderCard = ({ order }: Props) => {
+  return <div>{order.name}</div>;
 };
 
 // ❌ function 宣言
-export function fetchPokemon(id: PokemonId) { ... }
-export function PokemonCard({ pokemon }: Props) { ... }
+export function fetchOrder(id: OrderId) { ... }
+export function OrderCard({ order }: Props) { ... }
 
 // ❌ function 式
-export const fetchPokemon = function(id: PokemonId) { ... }
+export const fetchOrder = function(id: OrderId) { ... }
 ```
 
 ---

@@ -13,18 +13,18 @@ Domain identifiers (IDs, names, etc.) must be declared as Branded Types — neve
 // ✅ Correct location: entities/xxx/model/types.ts
 import type { Branded } from "#/shared/lib/branded";
 
-export type PokemonId   = Branded<number, "PokemonId">;
-export type PokemonName = Branded<string, "PokemonName">;
+export type OrderId   = Branded<number, "OrderId">;
+export type OrderName = Branded<string, "OrderName">;
 ```
 
 Use Branded Types in props to prevent accidentally passing the wrong ID type:
 
 ```ts
 // ✅
-type Props = { pokemonId: PokemonId };
+type Props = { orderId: OrderId };
 
 // ❌ Raw primitives allow ID mix-ups
-type Props = { pokemonId: number };
+type Props = { orderId: number };
 ```
 
 ## Type Assertion Rules
@@ -40,9 +40,9 @@ type Props = { pokemonId: number };
 
 ```ts
 // ✅ entities/xxx/model/adapters.ts
-export const toPokemon = (raw: RawPokemon): Pokemon => ({
-  id:   brand<PokemonId>(raw.id),
-  name: brand<PokemonName>(raw.name),
+export const toOrder = (raw: RawOrder): Order => ({
+  id:   brand<OrderId>(raw.id),
+  name: brand<OrderName>(raw.name),
 });
 ```
 
@@ -62,13 +62,13 @@ Never use `!`. Replace with:
 
 ```ts
 // ✅
-export const fetchPokemon = async (id: PokemonId): Promise<Pokemon> => { ... }
-export const PokemonCard = ({ pokemon }: Props) => { ... }
+export const fetchOrder = async (id: OrderId): Promise<Order> => { ... }
+export const OrderCard = ({ order }: Props) => { ... }
 
 // ❌
-export function fetchPokemon(id: PokemonId) { ... }
-export function PokemonCard({ pokemon }: Props) { ... }
-export const fetchPokemon = function(id: PokemonId) { ... }
+export function fetchOrder(id: OrderId) { ... }
+export function OrderCard({ order }: Props) { ... }
+export const fetchOrder = function(id: OrderId) { ... }
 ```
 
 ## Raw Type Naming
@@ -76,6 +76,6 @@ export const fetchPokemon = function(id: PokemonId) { ... }
 BFF response types must use the `Raw` prefix:
 
 ```ts
-type RawPokemon = { id: number; name: string };  // ✅
-type Pokemon    = { id: PokemonId; name: PokemonName };  // internal domain type
+type RawOrder = { id: number; name: string };  // ✅
+type Order    = { id: OrderId; name: OrderName };  // internal domain type
 ```

@@ -7,46 +7,46 @@ import { useAtomValue } from "jotai";
 
 import { isJaAtom } from "#/shared/state/langAtom";
 
-import { useDiagnosePokemon } from "./useDiagnosePokemon";
-import type { PokemonOption } from "./usePokemonOptions";
-import { usePokemonOptions } from "./usePokemonOptions";
-import styles from "./DiagnoseForm.module.css";
+import { useCompareSampleItems } from "./useCompareSampleItems";
+import type { SampleItemOption } from "./useSampleItemOptions";
+import { useSampleItemOptions } from "./useSampleItemOptions";
+import styles from "./CompareSampleItemsForm.module.css";
 
-const SelectInput = ({ "aria-activedescendant": ariaActiveDescendant, ...props }: InputProps<PokemonOption, boolean, GroupBase<PokemonOption>>) => (
+const SelectInput = ({ "aria-activedescendant": ariaActiveDescendant, ...props }: InputProps<SampleItemOption, boolean, GroupBase<SampleItemOption>>) => (
   <components.Input {...props} aria-activedescendant={ariaActiveDescendant || undefined} />
 );
 
 const i18n = {
   ja: {
-    title: "ポケモン相性診断",
-    placeholderA: "ポケモンA を選択",
-    placeholderB: "ポケモンB を選択",
-    submit: "診断する",
-    submitting: "診断中…",
-    error: "IDが正しくないか、存在しないポケモンです。",
+    title: "サンプル相性診断",
+    placeholderA: "アイテムA を選択",
+    placeholderB: "アイテムB を選択",
+    submit: "比較する",
+    submitting: "比較中…",
+    error: "IDが正しくないか、存在しないサンプルアイテムです。",
   },
   en: {
-    title: "Pokémon Compatibility",
-    placeholderA: "Select Pokémon A",
-    placeholderB: "Select Pokémon B",
-    submit: "Diagnose",
-    submitting: "Diagnosing…",
-    error: "Invalid Pokémon. Please check the selection.",
+    title: "Sample Compatibility",
+    placeholderA: "Select Item A",
+    placeholderB: "Select Item B",
+    submit: "Compare",
+    submitting: "Comparing…",
+    error: "Invalid item. Please check the selection.",
   },
 } as const;
 
-export const DiagnoseForm = () => {
-  const [selectedA, setSelectedA] = useState<PokemonOption | null>(null);
-  const [selectedB, setSelectedB] = useState<PokemonOption | null>(null);
+export const CompareSampleItemsForm = () => {
+  const [selectedA, setSelectedA] = useState<SampleItemOption | null>(null);
+  const [selectedB, setSelectedB] = useState<SampleItemOption | null>(null);
   const isJa = useAtomValue(isJaAtom);
   const t = isJa ? i18n.ja : i18n.en;
-  const { options, loading: optionsLoading } = usePokemonOptions();
-  const { diagnose, loading: diagnosing, error } = useDiagnosePokemon();
+  const { options, loading: optionsLoading } = useSampleItemOptions();
+  const { compare, loading: comparing, error } = useCompareSampleItems();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedA === null || selectedB === null) return;
-    await diagnose({ id_a: selectedA.value, id_b: selectedB.value });
+    await compare({ id_a: selectedA.value, id_b: selectedB.value });
   };
 
   return (
@@ -55,7 +55,7 @@ export const DiagnoseForm = () => {
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputs}>
           <Select
-            instanceId="pokemon-a"
+            instanceId="sample-item-a"
             isMulti={false}
             options={options}
             value={selectedA}
@@ -68,7 +68,7 @@ export const DiagnoseForm = () => {
             classNamePrefix="react-select"
           />
           <Select
-            instanceId="pokemon-b"
+            instanceId="sample-item-b"
             isMulti={false}
             options={options}
             value={selectedB}
@@ -83,10 +83,10 @@ export const DiagnoseForm = () => {
         </div>
         <button
           type="submit"
-          disabled={diagnosing || selectedA === null || selectedB === null}
+          disabled={comparing || selectedA === null || selectedB === null}
           className={styles.button}
         >
-          {diagnosing ? t.submitting : t.submit}
+          {comparing ? t.submitting : t.submit}
         </button>
       </form>
       {error !== null && <p className={styles.error}>{t.error}</p>}

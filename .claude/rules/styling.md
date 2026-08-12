@@ -12,18 +12,18 @@ Full reference: [docs/styling-guide.md](../docs/styling-guide.md)
 - Global styles (reset, base) go only in `src/styles.css` — keep additions minimal
 
 ```
-widgets/pokemon-panel/
-  PokemonPanel.tsx
-  PokemonPanel.module.css    ← same name, same directory
-  PokemonCard.tsx
-  PokemonCard.module.css
+widgets/order-panel/
+  OrderPanel.tsx
+  OrderPanel.module.css    ← same name, same directory
+  OrderCard.tsx
+  OrderCard.module.css
 ```
 
 ```tsx
-// PokemonCard.tsx
-import styles from './PokemonCard.module.css'
+// OrderCard.tsx
+import styles from './OrderCard.module.css'
 
-export const PokemonCard = ({ pokemon }: Props) => (
-  <div className={styles.card}>{pokemon.name}</div>
+export const OrderCard = ({ order }: Props) => (
+  <div className={styles.card}>{order.name}</div>
 )
 ```

@@ -1,1 +1,0 @@
-export { MatchResultPanel } from "./MatchResultPanel";

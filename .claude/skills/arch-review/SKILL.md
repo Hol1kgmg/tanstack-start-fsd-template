@@ -1,6 +1,6 @@
 ---
 name: arch-review
-description: FSD アーキテクチャ基準への準拠をチェックし、レポートを出力する（check-only・修正はしない）。フェーズ2（振り分け）の完了判定、PHASE1 未振り分けスライスの棚卸し、マージ前の準拠確認に使う。引数でスライスやパスを指定可能（例:/arch-review widgets/pokemon-diagnosis）。
+description: FSD アーキテクチャ基準への準拠をチェックし、レポートを出力する（check-only・修正はしない）。フェーズ2（振り分け）の完了判定、PHASE1 未振り分けスライスの棚卸し、マージ前の準拠確認に使う。引数でスライスやパスを指定可能（例:/arch-review widgets/order-summary）。
 allowed-tools: Read, Grep, Glob
 ---
 

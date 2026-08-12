@@ -1,44 +1,24 @@
 # Project Overview
 
-Pokemon compatibility diagnosis app (TanStack Start / React 19 / FSD)
+TanStack Start / React 19 / FSD template repository. Includes a domain-agnostic sample compatibility-check feature (under `/sample/match`, all slices prefixed `sample-`) demonstrating the FSD layer conventions — no external API dependency, safe to delete wholesale when building a real app on top of this template.
 
 # Setup and Basic Usage
 
 Setup instructions and basic usage are documented in [README.md](./README.md).
 
-# Rules
+# Work Rules
+1. Propose implementation plan
+2. Wait for approval
+3. Start implementation
 
-## MUST
-- Always propose an implementation plan and wait for approval before starting work.
-- Always append `; echo 'exit: $?'` to every Bash command to confirm success.
-- Always use dedicated tools for file operations:
-  - File reading → `Read`
-  - File editing → `Edit`
-  - File writing → `Write`
-  - File search → `Glob`
-  - Content search → `Grep`
-
-## Task Runner
-
-Commands are managed by `mise` tasks in `mise.toml` (humans and AI agents share the same interface).
-
-AI agents must use only these commands — never call `pnpm` directly.
-
-```
-mise run dev          # Start development server
-mise run typecheck    # TypeScript type check
-mise run lint         # Linter
-mise run test         # Unit tests
-mise run build        # Production build
-```
-
-List all tasks with `mise tasks`.
-
-Options are passed after `--`: e.g., `mise run dev -- --port 3001`
-
-## MUST NOT
-- Never use `cd` in Bash commands, and never use directory flags (`--dir`, `-C`, `--cwd`, etc.) to change the working directory. Run commands from the project root as-is (e.g., `mise run typecheck`, `mise run lint`, `git status`).
-- Never use `grep`, `find`, `cat`, `sed`, or `awk` in Bash. Use dedicated tools instead.
+# Tool Usage Policy
+**Prefer dedicated tools for file operations by default** (not enforced via `permissions.deny` — occasional Bash use is fine when it's genuinely more convenient):
+- `ls`, `find` → `Glob` tool
+- `cat`, `head`, `tail` → `Read` tool
+- `grep` → `Grep` tool
+- `sed`, `awk` → `Edit` tool
+- File writing → `Write` tool
+- `curl` → `WebFetch` tool## Task Runner
 
 # Coding Standards
 
@@ -50,5 +30,5 @@ Options are passed after `--`: e.g., `mise run dev -- --port 3001`
 @.claude/rules/styling.md
 
 # Language Settings
-- Responses: Japanese
+- Responses: `.claude/settings.json` - `language`
 - Thinking: English (for token reduction)

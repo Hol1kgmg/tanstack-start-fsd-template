@@ -57,7 +57,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "ポケモン相性診断 | Poke App",
+        title: "TanStack Start FSD Template",
       },
     ],
     links: [

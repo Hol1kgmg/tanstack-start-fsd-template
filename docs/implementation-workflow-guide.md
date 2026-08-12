@@ -36,11 +36,11 @@
 新規機能は `widgets/` に1スライスとして実装する。本来 `features/` `aggregates/` `entities/` に置くべきファイル群を、スライス内に同居させてよい。
 
 ```
-widgets/pokemon-diagnosis/          ← フェーズ1の仮実装スライス
+widgets/order-summary/              ← フェーズ1の仮実装スライス
   index.ts                          ← 先頭に PHASE1 マーカー
-  PokemonDiagnosis.tsx
-  PokemonDiagnosis.module.css
-  usePokemonDiagnosis.ts            ← 本来 features/entities に置くデータ取得も同居可
+  OrderSummary.tsx
+  OrderSummary.module.css
+  useOrderSummary.ts                ← 本来 features/entities に置くデータ取得も同居可
   adapters.ts                       ← 本来 entities/xxx/model/ に置く変換も同居可
   types.ts                          ← 本来 entities/xxx/model/ に置く型も同居可
   atoms.ts                          ← 本来 features/entities に置く状態も同居可
@@ -55,7 +55,7 @@ widgets/pokemon-diagnosis/          ← フェーズ1の仮実装スライス
 
 ```ts
 /* PHASE1: 未振り分け */
-export { PokemonDiagnosis } from "./PokemonDiagnosis";
+export { OrderSummary } from "./OrderSummary";
 ```
 
 - マーカーはフェーズ2完了時に削除する

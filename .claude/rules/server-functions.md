@@ -21,16 +21,16 @@ Response adapter placement follows type ownership:
 ## Read (useQuery)
 
 ```ts
-// ✅ features/search-pokemon/useSearchPokemon.ts
-import { pokemonKeys } from "#/entities/pokemon";
+// ✅ features/search-order/useSearchOrder.ts
+import { orderKeys } from "#/entities/order";
 
-export const useSearchPokemon = (id: PokemonId) =>
+export const useSearchOrder = (id: OrderId) =>
   useQuery({
-    queryKey: pokemonKeys.detail(id),
+    queryKey: orderKeys.detail(id),
     queryFn: async () => {
-      const res = await fetch(`/api/pokemon/${id}`);
+      const res = await fetch(`/api/order/${id}`);
       if (!res.ok) throw new Error(`BFF error: ${res.status}`);
-      return toPokemon(await res.json());
+      return toOrder(await res.json());
     },
   });
 ```
@@ -40,7 +40,7 @@ export const useSearchPokemon = (id: PokemonId) =>
 
 ```ts
 // ❌ Fetching from entities or widgets
-// entities/pokemon/ui/PokemonCard.tsx に fetch を書いてはいけない
+// entities/order/ui/OrderCard.tsx に fetch を書いてはいけない
 ```
 
 ## Mutation (fetch)
@@ -48,11 +48,11 @@ export const useSearchPokemon = (id: PokemonId) =>
 ```ts
 // ✅ features/toggle-favorite/useToggleFavorite.ts
 export const useToggleFavorite = () => {
-  const toggle = async (pokemonId: PokemonId) => {
+  const toggle = async (orderId: OrderId) => {
     const res = await fetch("/api/favorites", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pokemonId }),
+      body: JSON.stringify({ orderId }),
     });
     if (!res.ok) throw new Error(`BFF error: ${res.status}`);
   };
@@ -70,18 +70,18 @@ Apply `"use client"` only to the minimum unit that needs state, events, or brows
 ```tsx
 // ❌ Client-marking the whole block
 "use client";
-export const PokemonPanel = ({ pokemon }: Props) => (
+export const OrderPanel = ({ order }: Props) => (
   <section>
-    <PokemonCard pokemon={pokemon} />    {/* becomes client unnecessarily */}
-    <FavoriteButton pokemonId={pokemon.id} />
+    <OrderCard order={order} />    {/* becomes client unnecessarily */}
+    <FavoriteButton orderId={order.id} />
   </section>
 );
 
 // ✅ Extract only the interactive part
-export const PokemonPanel = ({ pokemon }: Props) => (
+export const OrderPanel = ({ order }: Props) => (
   <section>
-    <PokemonCard pokemon={pokemon} />
-    <FavoriteButton pokemonId={pokemon.id} />  {/* "use client" inside here only */}
+    <OrderCard order={order} />
+    <FavoriteButton orderId={order.id} />  {/* "use client" inside here only */}
   </section>
 );
 ```
