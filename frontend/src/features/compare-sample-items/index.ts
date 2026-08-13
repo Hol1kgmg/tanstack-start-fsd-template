@@ -1,2 +1,2 @@
-export { CompareSampleItemsForm } from "./CompareSampleItemsForm";
-export { compareResultAtom } from "./atoms";
+export { CompareSampleItemsForm } from "./ui/CompareSampleItemsForm";
+export { compareResultAtom } from "./model/atoms";

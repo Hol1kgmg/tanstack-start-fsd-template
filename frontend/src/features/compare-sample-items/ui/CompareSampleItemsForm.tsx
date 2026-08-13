@@ -7,9 +7,9 @@ import { useAtomValue } from "jotai";
 
 import { isJaAtom } from "#/shared/state/langAtom";
 
-import { useCompareSampleItems } from "./useCompareSampleItems";
-import type { SampleItemOption } from "./useSampleItemOptions";
-import { useSampleItemOptions } from "./useSampleItemOptions";
+import { useCompareSampleItems } from "../hooks/useCompareSampleItems";
+import type { SampleItemOption } from "../hooks/useSampleItemOptions";
+import { useSampleItemOptions } from "../hooks/useSampleItemOptions";
 import styles from "./CompareSampleItemsForm.module.css";
 
 const SelectInput = ({ "aria-activedescendant": ariaActiveDescendant, ...props }: InputProps<SampleItemOption, boolean, GroupBase<SampleItemOption>>) => (

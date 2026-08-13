@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useSetAtom } from "jotai";
 
-import { toCompareResult } from "./adapters";
-import { compareResultAtom } from "./atoms";
-import type { CompareRequest } from "./types";
+import { toCompareResult } from "../model/adapters";
+import { compareResultAtom } from "../model/atoms";
+import type { CompareRequest } from "../model/types";
 
 export const useCompareSampleItems = () => {
   const setCompareResult = useSetAtom(compareResultAtom);

@@ -192,6 +192,18 @@ src/
       adapters.ts                   ← feature 専用レスポンス型の変換（任意）
     toggle-favorite/
       useToggleFavorite.ts          ← UI 不要なケース（.tsx なしで成立）
+    compare-items/                  ← ファイル数が増えた場合の分割例（任意）
+      model/
+        types.ts
+        atoms.ts
+        adapters.ts
+      ui/
+        CompareItemsForm.tsx
+        CompareItemsForm.module.css
+      hooks/
+        useCompareItems.ts
+        useItemOptions.ts
+      index.ts                      ← 公開 API はスライス直下に残す
 
   aggregates/                       ← 複数 composite エンティティをまたぐ型・UI（FSD 非標準）
     order-summary/
@@ -323,6 +335,14 @@ atoms・types は置かない。features / aggregates / entities / shared の責
 | `atoms.ts` | feature に閉じた一時的な状態（フォーム入力値・フィルター条件等） |
 | `types.ts` | feature 固有の型定義 |
 | `adapters.ts` | feature に閉じたレスポンス型の変換（配置基準は下記） |
+
+**ファイル数が増えた場合は `model/` / `ui/` / `hooks/` へ分割してよい（任意）:**
+
+- `model/` — `types.ts` / `atoms.ts` / `adapters.ts`
+- `ui/` — `*.tsx` とその `*.module.css`
+- `hooks/` — `useXxx.ts`（複数ある場合）
+- `index.ts` は分割の有無に関わらずスライス直下に置く（公開 API はここでのみ定義する）
+- ファイル数が少ないスライスはフラット構成のままでよい（分割は義務ではない）
 
 **adapters.ts の配置は型の所有権で決める:**
 
